@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="config.js"></script>
     <title>DCF Attendance</title>
 
     <style>
@@ -453,9 +454,7 @@
     </div>
 
     <script>
-        const webAppURL =
-            "https://script.google.com/macros/s/AKfycbwXdOb_GH5yN3XxDkPovuYM3RrKN5agL65XOTEQqUJg6YyyTQPRLqcec0wmiTPjQoKnQg/exec";
-
+        const webAppURL = CONFIG.WEB_APP_URL;
 
         const SUBJECT_NAMES = {
             BSC_CPP: "BSc - C++",
