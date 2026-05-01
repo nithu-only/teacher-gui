@@ -25,7 +25,7 @@
 
         .wrapper {
             width: 100%;
-            max-width: 1100px;
+            max-width: 850px;
             margin: auto;
             padding: 30px 20px;
         }
@@ -47,11 +47,11 @@
 
         #loginPage {
             margin-top: 90px;
-            max-width: 520px;
         }
 
         .input,
-        select {
+        select,
+        #date {
             width: 100%;
             padding: 14px;
             margin-bottom: 15px;
@@ -61,6 +61,12 @@
             color: white;
             font-size: 16px;
             outline: none;
+        }
+
+        .input:focus,
+        select:focus,
+        #date:focus {
+            box-shadow: 0 0 10px rgba(47, 158, 111, .2);
         }
 
         .btn {
@@ -91,47 +97,51 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 15px;
             margin-bottom: 20px;
         }
 
         #welcome {
             color: #9ad9b8;
             font-size: 14px;
-            margin-top: 6px;
         }
 
         .controls {
             display: grid;
-            grid-template-columns: 1.2fr 1fr 1fr auto;
+            grid-template-columns: 1fr 1fr 1fr auto;
             gap: 12px;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
         }
 
         .summary {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 14px;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
         }
 
         .stat {
             background: #151515;
-            border: 1px solid rgba(47, 158, 111, .22);
-            border-radius: 16px;
-            padding: 22px;
+            border: 1px solid rgba(47, 158, 111, .18);
+            border-radius: 14px;
+            padding: 25px;
             text-align: center;
+            transition: .2s;
+        }
+
+        .stat:hover {
+            background: #1b1b1b;
+            transform: translateY(-2px);
         }
 
         .stat h3 {
             color: #9ad9b8;
-            font-size: 14px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            font-size: 15px;
         }
 
         .stat p {
             color: #2f9e6f;
-            font-size: 30px;
+            font-size: 36px;
             font-weight: bold;
         }
 
@@ -144,23 +154,29 @@
             border-radius: 14px;
             background: #151515;
             border: 1px solid rgba(47, 158, 111, .18);
+            transition: .2s;
+        }
+
+        .student:hover {
+            background: #1b1b1b;
+            transform: translateY(-1px);
         }
 
         .badge {
-            padding: 7px 14px;
+            padding: 10px 18px;
             border-radius: 999px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
         }
 
         .present {
-            background: rgba(47, 158, 111, .15);
+            background: rgba(47, 158, 111, .12);
             color: #57d696;
-            border: 1px solid rgba(47, 158, 111, .4);
+            border: 1px solid rgba(47, 158, 111, .35);
         }
 
         .absent {
-            background: rgba(220, 53, 69, .14);
+            background: rgba(220, 53, 69, .12);
             color: #ff7d88;
             border: 1px solid rgba(220, 53, 69, .35);
         }
@@ -185,6 +201,70 @@
             to {
                 transform: rotate(360deg);
             }
+        }
+
+        /* flatpickr custom theme */
+        .flatpickr-calendar {
+            background: #111 !important;
+            border: 1px solid #2f9e6f !important;
+            box-shadow: 0 0 25px rgba(47, 158, 111, .18) !important;
+            border-radius: 16px !important;
+        }
+
+        .flatpickr-months .flatpickr-month {
+            color: white !important;
+            fill: white !important;
+        }
+
+        .flatpickr-weekday {
+            color: #2f9e6f !important;
+            font-weight: 600;
+        }
+
+        .flatpickr-day {
+            color: white !important;
+            border-radius: 10px !important;
+        }
+
+        .flatpickr-day:hover {
+            background: #1d1d1d !important;
+        }
+
+        .flatpickr-day.selected {
+            background: #2f9e6f !important;
+            border-color: #2f9e6f !important;
+        }
+
+        .flatpickr-day.today {
+            border-color: #2f9e6f !important;
+        }
+
+        .flatpickr-prev-month svg,
+        .flatpickr-next-month svg {
+            fill: white !important;
+        }
+
+        .flatpickr-monthDropdown-months,
+        .flatpickr-monthDropdown-month {
+            background: #111 !important;
+            color: white !important;
+        }
+
+        .numInputWrapper input {
+            background: transparent !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .numInputWrapper span {
+            filter: invert(1);
+            opacity: .8;
+        }
+
+        .flatpickr-day.prevMonthDay,
+        .flatpickr-day.nextMonthDay {
+            visibility: hidden !important;
+            pointer-events: none;
         }
 
         .modal-overlay {
@@ -222,7 +302,7 @@
             text-align: center;
         }
 
-        @media(max-width:900px) {
+        @media(max-width:700px) {
 
             .controls,
             .summary {
@@ -232,19 +312,8 @@
             .topbar {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 12px;
             }
-        }
-
-        .flatpickr-calendar {
-            background: #111 !important;
-            border: 1px solid #2f9e6f !important;
-            border-radius: 16px !important;
-        }
-
-        .flatpickr-day.prevMonthDay,
-        .flatpickr-day.nextMonthDay {
-            visibility: hidden !important;
-            pointer-events: none;
         }
     </style>
 </head>
@@ -253,7 +322,7 @@
 
     <div id="loginPage" class="wrapper">
         <div class="card">
-            <h1>DCF Admin</h1>
+            <h1>Department of DCF</h1>
             <input id="username" class="input" placeholder="Username">
             <input id="password" class="input" type="password" placeholder="Password">
             <button id="loginBtn" class="btn" onclick="login()">Login</button>
@@ -265,7 +334,7 @@
 
             <div class="topbar">
                 <div>
-                    <h1 style="margin:0">Admin Dashboard</h1>
+                    <h1 style="margin:0;text-align:left;">Admin Dashboard</h1>
                     <div id="welcome"></div>
                 </div>
                 <button class="btn logout" onclick="logout()">Logout</button>
@@ -318,7 +387,7 @@
     </div>
 
     <script>
-        const webAppURL = "https://script.google.com/macros/s/AKfycbxoWU-3BYK7rlQYpfMuyHcokxXqQ0P7SPuBLG6CaO1dNke1qGPCS8cu3aUe2_1w5oj5Aw/exec";
+        const webAppURL = "https://script.google.com/macros/s/AKfycbwXdOb_GH5yN3XxDkPovuYM3RrKN5agL65XOTEQqUJg6YyyTQPRLqcec0wmiTPjQoKnQg/exec";
 
         const SUBJECT_NAMES = {
             BSC_CPP: "BSc - C++",
@@ -384,7 +453,7 @@
 
                 if (!res.success) {
                     showAlert("Login Failed", res.message);
-                } else if (res.role !== "ADMIN") {
+                } else if (String(res.role).trim().toUpperCase() !== "ADMIN") {
                     showAlert("Access Denied", "Admin access only");
                 } else {
                     admin = res;
